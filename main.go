@@ -1,50 +1,60 @@
 package main
 
-import (
-	"fmt"
-	"strings"
-)
+import "fmt"
 
 func main() {
-	//Números
-	entero := 10
-	decimal := 3.14
-	suma := entero + int(decimal)
 
-	//Texto
-	mensaje := "Hola, "
-	concatenado := mensaje + "Oxalc"
-	enMayuscula := strings.ToUpper(concatenado)
+	defer fmt.Println("FIN")
 
-	//Booleanos
-	esVerdadero := true
-
-	// Arrays y Slice
-	arrayFijo := [3]int{1, 2, 3}
-	sliceVariable := []int{4, 5, 6}
-	sliceVariable = append(sliceVariable, 7)
-
-	//Mapas - Diccionarios
-	diccionario := map[string]int{
-		"clave1": 1,
-		"clave2": 2,
+	edad := 20
+	//Condicionales
+	//Assertive / negative programing
+	if edad < 18 {
+		fmt.Println("Eres menor de edad")
+		return
 	}
 
-	//Structs, es un tipo
-	type Persona struct {
-		Nombre string
-		Edad   int
+	fmt.Println("Soy mayor de edad")
+
+	//Bucle clasic
+	for i := 0; i < 5; i++ {
+		fmt.Printf("Iteracion: %d\n", i)
 	}
 
-	persona := Persona{Nombre: "Oxalc", Edad: 30}
+	//Bucle tipo while
+	n := 0
+	for n < 3 {
+		fmt.Printf("Iteracion: %d\n", n)
+		n++
+	}
 
-	//Imprimer Resultados
-	fmt.Println("Suma", suma)
-	fmt.Println("Mensaje", enMayuscula)
-	fmt.Println("Array", arrayFijo)
-	fmt.Println("Slice", sliceVariable)
-	fmt.Println("Mapa", diccionario)
-	fmt.Println("Struct", persona)
-	fmt.Println("Bool", esVerdadero)
+	//Bucle infinito
+	n = 0
+	for {
+		n++
+		if n == 5 {
+			continue
+		}
+		fmt.Printf("n en bucle infinito: %d\n", n)
+		if n >= 7 {
+			break
+		}
+	}
 
+	//Range
+	slice := []string{"uno", "dos", "tres"}
+	for index, value := range slice {
+		fmt.Printf("Indice: %d. Valor: %s\n", index, value)
+	}
+
+	//swicth
+	valor := 2
+	switch valor {
+	case 1:
+		fmt.Println("Es 1")
+	case 2:
+		fmt.Println("Es 2")
+	default:
+		fmt.Println("No es 1 ni 2")
+	}
 }
