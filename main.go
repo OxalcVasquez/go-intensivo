@@ -1,60 +1,71 @@
 package main
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+)
+
+// funcion classic
+func suma(a, b int) int {
+	return a + b
+}
+
+// funcion que devuelve mas de un valor
+func dividir(a, b float64) (float64, error) {
+	if b == 0 {
+		fmt.Errorf("No se puede devidir por 0")
+		return 0, errors.New("No se puede divir por cero")
+	}
+	cociente := a / b
+	return cociente, nil
+}
+
+// función con número variable de arguments
+func imprimirNombres(nombres ...string) {
+	for _, nombre := range nombres {
+		fmt.Println(nombre)
+	}
+}
+
+// ejemplo de closure
+// scope chaning
+var a = 0
+
+func contador() func() int {
+	c := 0
+	return func() int {
+		c++
+		return c + a
+	}
+}
+
+type Rectangulo struct {
+	Ancho, Alto float64
+}
+
+func (r Rectangulo) Area() float64 {
+	return r.Ancho * r.Alto
+}
 
 func main() {
 
-	defer fmt.Println("FIN")
-
-	edad := 20
-	//Condicionales
-	//Assertive / negative programing
-	if edad < 18 {
-		fmt.Println("Eres menor de edad")
+	cociente, error := dividir(10, 3)
+	if error != nil {
+		fmt.Println(error)
 		return
 	}
+	fmt.Println(cociente)
 
-	fmt.Println("Soy mayor de edad")
+	//Closure
+	cont := contador()
+	fmt.Println("contador: ,", cont())
+	fmt.Println("contador: ,", cont())
+	fmt.Println("contador: ,", cont())
+	fmt.Println("contador: ,", cont())
+	fmt.Println("contador: ,", cont())
+	fmt.Println("contador: ,", cont())
 
-	//Bucle clasic
-	for i := 0; i < 5; i++ {
-		fmt.Printf("Iteracion: %d\n", i)
-	}
+	rect := Rectangulo{Ancho: 10, Alto: 5}
+	fmt.Println("Area: ,", rect.Area())
 
-	//Bucle tipo while
-	n := 0
-	for n < 3 {
-		fmt.Printf("Iteracion: %d\n", n)
-		n++
-	}
-
-	//Bucle infinito
-	n = 0
-	for {
-		n++
-		if n == 5 {
-			continue
-		}
-		fmt.Printf("n en bucle infinito: %d\n", n)
-		if n >= 7 {
-			break
-		}
-	}
-
-	//Range
-	slice := []string{"uno", "dos", "tres"}
-	for index, value := range slice {
-		fmt.Printf("Indice: %d. Valor: %s\n", index, value)
-	}
-
-	//swicth
-	valor := 2
-	switch valor {
-	case 1:
-		fmt.Println("Es 1")
-	case 2:
-		fmt.Println("Es 2")
-	default:
-		fmt.Println("No es 1 ni 2")
-	}
 }
